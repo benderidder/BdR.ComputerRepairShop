@@ -1,0 +1,268 @@
+2023-01-03 12:10:41.754 +01:00 [INF] Registered 5 endpoints in 542 milliseconds.
+2023-01-03 12:10:42.038 +01:00 [INF] User profile is available. Using 'C:\Users\Ben.QICS\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2023-01-03 12:10:43.341 +01:00 [INF] Executed DbCommand (18ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+PRAGMA journal_mode = 'wal';
+2023-01-03 12:10:43.461 +01:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "Contributors" (
+    "Id" INTEGER NOT NULL CONSTRAINT "PK_Contributors" PRIMARY KEY AUTOINCREMENT,
+    "Name" TEXT NOT NULL
+);
+2023-01-03 12:10:43.462 +01:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "Projects" (
+    "Id" INTEGER NOT NULL CONSTRAINT "PK_Projects" PRIMARY KEY AUTOINCREMENT,
+    "Name" TEXT NOT NULL,
+    "Priority" INTEGER NOT NULL
+);
+2023-01-03 12:10:43.462 +01:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE TABLE "ToDoItems" (
+    "Id" INTEGER NOT NULL CONSTRAINT "PK_ToDoItems" PRIMARY KEY AUTOINCREMENT,
+    "Title" TEXT NOT NULL,
+    "Description" TEXT NOT NULL,
+    "ContributorId" INTEGER NULL,
+    "IsDone" INTEGER NOT NULL,
+    "ProjectId" INTEGER NULL,
+    CONSTRAINT "FK_ToDoItems_Projects_ProjectId" FOREIGN KEY ("ProjectId") REFERENCES "Projects" ("Id")
+);
+2023-01-03 12:10:43.462 +01:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+CREATE INDEX "IX_ToDoItems_ProjectId" ON "ToDoItems" ("ProjectId");
+2023-01-03 12:10:43.658 +01:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1
+    FROM "ToDoItems" AS "t")
+2023-01-03 12:10:43.700 +01:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "p"."Id", "p"."Name", "p"."Priority"
+FROM "Projects" AS "p"
+2023-01-03 12:10:43.706 +01:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "t"."Id", "t"."ContributorId", "t"."Description", "t"."IsDone", "t"."ProjectId", "t"."Title"
+FROM "ToDoItems" AS "t"
+2023-01-03 12:10:43.709 +01:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "c"."Id", "c"."Name"
+FROM "Contributors" AS "c"
+2023-01-03 12:10:43.884 +01:00 [INF] Executed DbCommand (6ms) [Parameters=[@p0='?' (Size = 7)], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "Contributors" ("Name")
+VALUES (@p0)
+RETURNING "Id";
+2023-01-03 12:10:43.908 +01:00 [INF] Executed DbCommand (0ms) [Parameters=[@p0='?' (Size = 8)], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "Contributors" ("Name")
+VALUES (@p0)
+RETURNING "Id";
+2023-01-03 12:10:44.017 +01:00 [INF] Executed DbCommand (1ms) [Parameters=[@p0='?' (Size = 12), @p1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "Projects" ("Name", "Priority")
+VALUES (@p0, @p1)
+RETURNING "Id";
+2023-01-03 12:10:44.029 +01:00 [INF] Executed DbCommand (0ms) [Parameters=[@p2='?' (DbType = Int32), @p3='?' (Size = 31), @p4='?' (DbType = Boolean), @p5='?' (DbType = Int32), @p6='?' (Size = 18)], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "ToDoItems" ("ContributorId", "Description", "IsDone", "ProjectId", "Title")
+VALUES (@p2, @p3, @p4, @p5, @p6)
+RETURNING "Id";
+2023-01-03 12:10:44.030 +01:00 [INF] Executed DbCommand (0ms) [Parameters=[@p0='?' (DbType = Int32), @p1='?' (Size = 81), @p2='?' (DbType = Boolean), @p3='?' (DbType = Int32), @p4='?' (Size = 15)], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "ToDoItems" ("ContributorId", "Description", "IsDone", "ProjectId", "Title")
+VALUES (@p0, @p1, @p2, @p3, @p4)
+RETURNING "Id";
+2023-01-03 12:10:44.031 +01:00 [INF] Executed DbCommand (0ms) [Parameters=[@p0='?' (DbType = Int32), @p1='?' (Size = 59), @p2='?' (DbType = Boolean), @p3='?' (DbType = Int32), @p4='?' (Size = 20)], CommandType='"Text"', CommandTimeout='30']
+INSERT INTO "ToDoItems" ("ContributorId", "Description", "IsDone", "ProjectId", "Title")
+VALUES (@p0, @p1, @p2, @p3, @p4)
+RETURNING "Id";
+2023-01-03 12:10:44.292 +01:00 [INF] Application started. Press Ctrl+C to shut down.
+2023-01-03 12:10:44.292 +01:00 [INF] Hosting environment: Development
+2023-01-03 12:10:44.292 +01:00 [INF] Content root path: C:\code\benderidder-github\BdR.ComputerRepairShop\src\BdR.ComputerRepairShop.Web
+2023-01-03 12:10:44.350 +01:00 [INF] Request starting HTTP/1.1 GET http://localhost:57678/ - -
+2023-01-03 12:10:44.467 +01:00 [WRN] Failed to determine the https port for redirect.
+2023-01-03 12:10:44.499 +01:00 [INF] Executing endpoint 'BdR.ComputerRepairShop.Web.Controllers.HomeController.Index (BdR.ComputerRepairShop.Web)'
+2023-01-03 12:10:44.513 +01:00 [INF] Route matched with {action = "Index", controller = "Home", page = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller BdR.ComputerRepairShop.Web.Controllers.HomeController (BdR.ComputerRepairShop.Web).
+2023-01-03 12:10:44.648 +01:00 [INF] Executing action method BdR.ComputerRepairShop.Web.Controllers.HomeController.Index (BdR.ComputerRepairShop.Web) - Validation state: "Valid"
+2023-01-03 12:10:44.654 +01:00 [INF] Executed action method BdR.ComputerRepairShop.Web.Controllers.HomeController.Index (BdR.ComputerRepairShop.Web), returned result Microsoft.AspNetCore.Mvc.ViewResult in 1.1342ms.
+2023-01-03 12:10:44.666 +01:00 [INF] Executing ViewResult, running view Index.
+2023-01-03 12:10:45.021 +01:00 [INF] Executed ViewResult - view Index executed in 358.791ms.
+2023-01-03 12:10:45.027 +01:00 [INF] Executed action BdR.ComputerRepairShop.Web.Controllers.HomeController.Index (BdR.ComputerRepairShop.Web) in 512.5742ms
+2023-01-03 12:10:45.027 +01:00 [INF] Executed endpoint 'BdR.ComputerRepairShop.Web.Controllers.HomeController.Index (BdR.ComputerRepairShop.Web)'
+2023-01-03 12:10:45.098 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:57678/ - - - 200 - text/html;+charset=utf-8 750.9995ms
+2023-01-03 12:10:45.146 +01:00 [INF] Request starting HTTP/1.1 GET http://localhost:57678/js/site.js?v=4q1jwFhaPaZgr8WAUSrux6hAuh0XDg9kPS3xIVq36I0 - -
+2023-01-03 12:10:45.146 +01:00 [INF] Request starting HTTP/1.1 GET http://localhost:57678/css/site.css?v=AKvNjO3dCPPS0eSU1Ez8T2wI280i08yGycV9ndytL-c - -
+2023-01-03 12:10:45.146 +01:00 [INF] Request starting HTTP/1.1 GET http://localhost:57678/lib/bootstrap/dist/css/bootstrap.min.css - -
+2023-01-03 12:10:45.146 +01:00 [INF] Request starting HTTP/1.1 GET http://localhost:57678/lib/jquery/dist/jquery.min.js - -
+2023-01-03 12:10:45.147 +01:00 [INF] Request starting HTTP/1.1 GET http://localhost:57678/BdR.ComputerRepairShop.Web.styles.css?v=n4VQ-qHJiKTFAdGQS79qHVt2lg1Js3qM6PZrKNYLWO0 - -
+2023-01-03 12:10:45.161 +01:00 [INF] Request starting HTTP/1.1 GET http://localhost:57678/lib/bootstrap/dist/js/bootstrap.bundle.min.js - -
+2023-01-03 12:10:45.318 +01:00 [INF] Sending file. Request path: '/css/site.css'. Physical path: 'C:\code\benderidder-github\BdR.ComputerRepairShop\src\BdR.ComputerRepairShop.Web\wwwroot\css\site.css'
+2023-01-03 12:10:45.318 +01:00 [INF] Sending file. Request path: '/js/site.js'. Physical path: 'C:\code\benderidder-github\BdR.ComputerRepairShop\src\BdR.ComputerRepairShop.Web\wwwroot\js\site.js'
+2023-01-03 12:10:45.322 +01:00 [INF] Sending file. Request path: '/BdR.ComputerRepairShop.Web.styles.css'. Physical path: 'C:\code\benderidder-github\BdR.ComputerRepairShop\src\BdR.ComputerRepairShop.Web\obj\Debug\net7.0\scopedcss\bundle\BdR.ComputerRepairShop.Web.styles.css'
+2023-01-03 12:10:45.326 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:57678/css/site.css?v=AKvNjO3dCPPS0eSU1Ez8T2wI280i08yGycV9ndytL-c - - - 200 194 text/css 180.0586ms
+2023-01-03 12:10:45.326 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:57678/BdR.ComputerRepairShop.Web.styles.css?v=n4VQ-qHJiKTFAdGQS79qHVt2lg1Js3qM6PZrKNYLWO0 - - - 200 1143 text/css 179.5170ms
+2023-01-03 12:10:45.326 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:57678/js/site.js?v=4q1jwFhaPaZgr8WAUSrux6hAuh0XDg9kPS3xIVq36I0 - - - 200 230 text/javascript 180.0109ms
+2023-01-03 12:10:45.326 +01:00 [INF] Sending file. Request path: '/lib/bootstrap/dist/css/bootstrap.min.css'. Physical path: 'C:\code\benderidder-github\BdR.ComputerRepairShop\src\BdR.ComputerRepairShop.Web\wwwroot\lib\bootstrap\dist\css\bootstrap.min.css'
+2023-01-03 12:10:45.326 +01:00 [INF] Sending file. Request path: '/lib/bootstrap/dist/js/bootstrap.bundle.min.js'. Physical path: 'C:\code\benderidder-github\BdR.ComputerRepairShop\src\BdR.ComputerRepairShop.Web\wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.min.js'
+2023-01-03 12:10:45.327 +01:00 [INF] Sending file. Request path: '/lib/jquery/dist/jquery.min.js'. Physical path: 'C:\code\benderidder-github\BdR.ComputerRepairShop\src\BdR.ComputerRepairShop.Web\wwwroot\lib\jquery\dist\jquery.min.js'
+2023-01-03 12:10:45.334 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:57678/lib/bootstrap/dist/js/bootstrap.bundle.min.js - - - 200 78474 text/javascript 173.6957ms
+2023-01-03 12:10:45.336 +01:00 [INF] Request starting HTTP/1.1 GET http://localhost:57678/_framework/aspnetcore-browser-refresh.js - -
+2023-01-03 12:10:45.337 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:57678/lib/bootstrap/dist/css/bootstrap.min.css - - - 200 162726 text/css 191.6325ms
+2023-01-03 12:10:45.337 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:57678/lib/jquery/dist/jquery.min.js - - - 200 89478 text/javascript 191.5289ms
+2023-01-03 12:10:45.343 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:57678/_framework/aspnetcore-browser-refresh.js - - - 200 12022 application/javascript;+charset=utf-8 6.9956ms
+2023-01-03 12:10:45.807 +01:00 [INF] Request starting HTTP/1.1 GET http://localhost:57678/_vs/browserLink - -
+2023-01-03 12:10:45.907 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:57678/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 99.0182ms
+2023-01-03 12:10:45.927 +01:00 [INF] Request starting HTTP/1.1 GET http://localhost:57678/lib/bootstrap/dist/js/bootstrap.bundle.min.js.map - -
+2023-01-03 12:10:45.955 +01:00 [INF] Sending file. Request path: '/lib/bootstrap/dist/js/bootstrap.bundle.min.js.map'. Physical path: 'C:\code\benderidder-github\BdR.ComputerRepairShop\src\BdR.ComputerRepairShop.Web\wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.min.js.map'
+2023-01-03 12:10:45.973 +01:00 [INF] Request starting HTTP/1.1 GET http://localhost:57678/favicon.ico - -
+2023-01-03 12:10:45.989 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:57678/lib/bootstrap/dist/js/bootstrap.bundle.min.js.map - - - 200 327261 text/plain 62.1559ms
+2023-01-03 12:10:46.002 +01:00 [INF] Sending file. Request path: '/favicon.ico'. Physical path: 'C:\code\benderidder-github\BdR.ComputerRepairShop\src\BdR.ComputerRepairShop.Web\wwwroot\favicon.ico'
+2023-01-03 12:10:46.009 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:57678/favicon.ico - - - 200 5430 image/x-icon 35.3952ms
+2023-01-03 12:12:39.963 +01:00 [INF] Request starting HTTP/1.1 GET http://localhost:57678/ProjectDetails/1 - -
+2023-01-03 12:12:39.970 +01:00 [INF] Executing endpoint '/ProjectDetails/Index'
+2023-01-03 12:12:39.988 +01:00 [INF] Route matched with {page = "/ProjectDetails/Index", action = "", controller = ""}. Executing page /ProjectDetails/Index
+2023-01-03 12:12:40.001 +01:00 [INF] Executing handler method BdR.ComputerRepairShop.Web.Pages.ProjectDetails.IndexModel.OnGetAsync - ModelState is "Valid"
+2023-01-03 12:12:40.123 +01:00 [INF] Executed DbCommand (0ms) [Parameters=[@__projectId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT "t"."Id", "t"."Name", "t"."Priority", "t0"."Id", "t0"."ContributorId", "t0"."Description", "t0"."IsDone", "t0"."ProjectId", "t0"."Title"
+FROM (
+    SELECT "p"."Id", "p"."Name", "p"."Priority"
+    FROM "Projects" AS "p"
+    WHERE "p"."Id" = @__projectId_0
+    LIMIT 1
+) AS "t"
+LEFT JOIN "ToDoItems" AS "t0" ON "t"."Id" = "t0"."ProjectId"
+ORDER BY "t"."Id"
+2023-01-03 12:12:40.135 +01:00 [INF] Executed handler method OnGetAsync, returned result .
+2023-01-03 12:12:40.137 +01:00 [INF] Executing an implicit handler method - ModelState is "Valid"
+2023-01-03 12:12:40.137 +01:00 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2023-01-03 12:12:40.157 +01:00 [INF] Executed page /ProjectDetails/Index in 167.8484ms
+2023-01-03 12:12:40.157 +01:00 [INF] Executed endpoint '/ProjectDetails/Index'
+2023-01-03 12:12:40.172 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:57678/ProjectDetails/1 - - - 200 - text/html;+charset=utf-8 213.1720ms
+2023-01-03 12:12:40.178 +01:00 [INF] Request starting HTTP/1.1 GET http://localhost:57678/BdR.ComputerRepairShop.Web.styles.css?v=n4VQ-qHJiKTFAdGQS79qHVt2lg1Js3qM6PZrKNYLWO0 - -
+2023-01-03 12:12:40.178 +01:00 [INF] Request starting HTTP/1.1 GET http://localhost:57678/_framework/aspnetcore-browser-refresh.js - -
+2023-01-03 12:12:40.180 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:57678/_framework/aspnetcore-browser-refresh.js - - - 200 12022 application/javascript;+charset=utf-8 1.4966ms
+2023-01-03 12:12:40.180 +01:00 [INF] Request starting HTTP/1.1 GET http://localhost:57678/_vs/browserLink - -
+2023-01-03 12:12:40.205 +01:00 [INF] The file /BdR.ComputerRepairShop.Web.styles.css was not modified
+2023-01-03 12:12:40.207 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:57678/BdR.ComputerRepairShop.Web.styles.css?v=n4VQ-qHJiKTFAdGQS79qHVt2lg1Js3qM6PZrKNYLWO0 - - - 304 - text/css 28.3743ms
+2023-01-03 12:12:40.229 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:57678/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 48.5058ms
+2023-01-03 12:12:40.250 +01:00 [INF] Request starting HTTP/1.1 GET http://localhost:57678/lib/bootstrap/dist/js/bootstrap.bundle.min.js.map - -
+2023-01-03 12:12:40.255 +01:00 [INF] Sending file. Request path: '/lib/bootstrap/dist/js/bootstrap.bundle.min.js.map'. Physical path: 'C:\code\benderidder-github\BdR.ComputerRepairShop\src\BdR.ComputerRepairShop.Web\wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.min.js.map'
+2023-01-03 12:12:40.267 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:57678/lib/bootstrap/dist/js/bootstrap.bundle.min.js.map - - - 200 327261 text/plain 16.3325ms
+2023-01-03 12:12:51.757 +01:00 [INF] Request starting HTTP/1.1 GET http://localhost:57678/ - -
+2023-01-03 12:12:51.759 +01:00 [INF] Executing endpoint 'BdR.ComputerRepairShop.Web.Controllers.HomeController.Index (BdR.ComputerRepairShop.Web)'
+2023-01-03 12:12:51.759 +01:00 [INF] Route matched with {action = "Index", controller = "Home", page = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.IActionResult Index() on controller BdR.ComputerRepairShop.Web.Controllers.HomeController (BdR.ComputerRepairShop.Web).
+2023-01-03 12:12:51.776 +01:00 [INF] Executing action method BdR.ComputerRepairShop.Web.Controllers.HomeController.Index (BdR.ComputerRepairShop.Web) - Validation state: "Valid"
+2023-01-03 12:12:51.777 +01:00 [INF] Executed action method BdR.ComputerRepairShop.Web.Controllers.HomeController.Index (BdR.ComputerRepairShop.Web), returned result Microsoft.AspNetCore.Mvc.ViewResult in 0.0599ms.
+2023-01-03 12:12:51.777 +01:00 [INF] Executing ViewResult, running view Index.
+2023-01-03 12:12:51.784 +01:00 [INF] Executed ViewResult - view Index executed in 6.9598ms.
+2023-01-03 12:12:51.784 +01:00 [INF] Executed action BdR.ComputerRepairShop.Web.Controllers.HomeController.Index (BdR.ComputerRepairShop.Web) in 24.9409ms
+2023-01-03 12:12:51.784 +01:00 [INF] Executed endpoint 'BdR.ComputerRepairShop.Web.Controllers.HomeController.Index (BdR.ComputerRepairShop.Web)'
+2023-01-03 12:12:51.786 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:57678/ - - - 200 - text/html;+charset=utf-8 29.0382ms
+2023-01-03 12:12:51.795 +01:00 [INF] Request starting HTTP/1.1 GET http://localhost:57678/_framework/aspnetcore-browser-refresh.js - -
+2023-01-03 12:12:51.795 +01:00 [INF] Request starting HTTP/1.1 GET http://localhost:57678/_vs/browserLink - -
+2023-01-03 12:12:51.797 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:57678/_framework/aspnetcore-browser-refresh.js - - - 200 12022 application/javascript;+charset=utf-8 2.0215ms
+2023-01-03 12:12:51.826 +01:00 [INF] Request starting HTTP/1.1 GET http://localhost:57678/lib/bootstrap/dist/js/bootstrap.bundle.min.js.map - -
+2023-01-03 12:12:51.831 +01:00 [INF] Sending file. Request path: '/lib/bootstrap/dist/js/bootstrap.bundle.min.js.map'. Physical path: 'C:\code\benderidder-github\BdR.ComputerRepairShop\src\BdR.ComputerRepairShop.Web\wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.min.js.map'
+2023-01-03 12:12:51.833 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:57678/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 37.8417ms
+2023-01-03 12:12:51.844 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:57678/lib/bootstrap/dist/js/bootstrap.bundle.min.js.map - - - 200 327261 text/plain 17.8760ms
+2023-01-03 12:12:55.051 +01:00 [INF] Request starting HTTP/1.1 GET http://localhost:57678/ProjectDetails/Incomplete - -
+2023-01-03 12:12:55.054 +01:00 [INF] Executing endpoint '/ProjectDetails/Incomplete'
+2023-01-03 12:12:55.058 +01:00 [INF] Route matched with {page = "/ProjectDetails/Incomplete", action = "", controller = ""}. Executing page /ProjectDetails/Incomplete
+2023-01-03 12:12:55.061 +01:00 [INF] Executing handler method BdR.ComputerRepairShop.Web.Pages.ProjectDetails.IncompleteModel.OnGetAsync - ModelState is "Valid"
+2023-01-03 12:12:55.069 +01:00 [INF] Executed DbCommand (0ms) [Parameters=[@__projectId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT "t"."Id", "t"."Name", "t"."Priority", "t0"."Id", "t0"."ContributorId", "t0"."Description", "t0"."IsDone", "t0"."ProjectId", "t0"."Title"
+FROM (
+    SELECT "p"."Id", "p"."Name", "p"."Priority"
+    FROM "Projects" AS "p"
+    WHERE "p"."Id" = @__projectId_0
+    LIMIT 1
+) AS "t"
+LEFT JOIN "ToDoItems" AS "t0" ON "t"."Id" = "t0"."ProjectId"
+ORDER BY "t"."Id"
+2023-01-03 12:12:55.070 +01:00 [INF] Executed handler method OnGetAsync, returned result .
+2023-01-03 12:12:55.070 +01:00 [INF] Executing an implicit handler method - ModelState is "Valid"
+2023-01-03 12:12:55.070 +01:00 [INF] Executed an implicit handler method, returned result Microsoft.AspNetCore.Mvc.RazorPages.PageResult.
+2023-01-03 12:12:55.081 +01:00 [INF] Executed page /ProjectDetails/Incomplete in 23.0143ms
+2023-01-03 12:12:55.082 +01:00 [INF] Executed endpoint '/ProjectDetails/Incomplete'
+2023-01-03 12:12:55.084 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:57678/ProjectDetails/Incomplete - - - 200 - text/html;+charset=utf-8 32.6117ms
+2023-01-03 12:12:55.092 +01:00 [INF] Request starting HTTP/1.1 GET http://localhost:57678/_framework/aspnetcore-browser-refresh.js - -
+2023-01-03 12:12:55.092 +01:00 [INF] Request starting HTTP/1.1 GET http://localhost:57678/_vs/browserLink - -
+2023-01-03 12:12:55.094 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:57678/_framework/aspnetcore-browser-refresh.js - - - 200 12022 application/javascript;+charset=utf-8 1.7594ms
+2023-01-03 12:12:55.115 +01:00 [INF] Request starting HTTP/1.1 GET http://localhost:57678/lib/bootstrap/dist/js/bootstrap.bundle.min.js.map - -
+2023-01-03 12:12:55.122 +01:00 [INF] Sending file. Request path: '/lib/bootstrap/dist/js/bootstrap.bundle.min.js.map'. Physical path: 'C:\code\benderidder-github\BdR.ComputerRepairShop\src\BdR.ComputerRepairShop.Web\wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.min.js.map'
+2023-01-03 12:12:55.123 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:57678/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 30.7843ms
+2023-01-03 12:12:55.133 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:57678/lib/bootstrap/dist/js/bootstrap.bundle.min.js.map - - - 200 327261 text/plain 17.1968ms
+2023-01-03 12:12:59.000 +01:00 [INF] Request starting HTTP/1.1 GET http://localhost:57678/_framework/aspnetcore-browser-refresh.js - -
+2023-01-03 12:12:59.002 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:57678/_framework/aspnetcore-browser-refresh.js - - - 200 12022 application/javascript;+charset=utf-8 1.1526ms
+2023-01-03 12:12:59.023 +01:00 [INF] Request starting HTTP/1.1 GET http://localhost:57678/lib/bootstrap/dist/js/bootstrap.bundle.min.js.map - -
+2023-01-03 12:12:59.029 +01:00 [INF] Sending file. Request path: '/lib/bootstrap/dist/js/bootstrap.bundle.min.js.map'. Physical path: 'C:\code\benderidder-github\BdR.ComputerRepairShop\src\BdR.ComputerRepairShop.Web\wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.min.js.map'
+2023-01-03 12:12:59.039 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:57678/lib/bootstrap/dist/js/bootstrap.bundle.min.js.map - - - 200 327261 text/plain 16.5942ms
+2023-01-03 12:13:00.933 +01:00 [INF] Request starting HTTP/1.1 GET http://localhost:57678/Project/1 - -
+2023-01-03 12:13:00.935 +01:00 [INF] Executing endpoint 'BdR.ComputerRepairShop.Web.Controllers.ProjectController.Index (BdR.ComputerRepairShop.Web)'
+2023-01-03 12:13:00.941 +01:00 [INF] Route matched with {action = "Index", controller = "Project", page = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Index(Int32) on controller BdR.ComputerRepairShop.Web.Controllers.ProjectController (BdR.ComputerRepairShop.Web).
+2023-01-03 12:13:00.958 +01:00 [INF] Executing action method BdR.ComputerRepairShop.Web.Controllers.ProjectController.Index (BdR.ComputerRepairShop.Web) - Validation state: "Valid"
+2023-01-03 12:13:00.960 +01:00 [INF] Executed DbCommand (0ms) [Parameters=[@__projectId_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT "t"."Id", "t"."Name", "t"."Priority", "t0"."Id", "t0"."ContributorId", "t0"."Description", "t0"."IsDone", "t0"."ProjectId", "t0"."Title"
+FROM (
+    SELECT "p"."Id", "p"."Name", "p"."Priority"
+    FROM "Projects" AS "p"
+    WHERE "p"."Id" = @__projectId_0
+    LIMIT 1
+) AS "t"
+LEFT JOIN "ToDoItems" AS "t0" ON "t"."Id" = "t0"."ProjectId"
+ORDER BY "t"."Id"
+2023-01-03 12:13:00.962 +01:00 [INF] Executed action method BdR.ComputerRepairShop.Web.Controllers.ProjectController.Index (BdR.ComputerRepairShop.Web), returned result Microsoft.AspNetCore.Mvc.ViewResult in 4.215ms.
+2023-01-03 12:13:00.963 +01:00 [INF] Executing ViewResult, running view Index.
+2023-01-03 12:13:00.977 +01:00 [INF] Executed ViewResult - view Index executed in 15.1075ms.
+2023-01-03 12:13:00.978 +01:00 [INF] Executed action BdR.ComputerRepairShop.Web.Controllers.ProjectController.Index (BdR.ComputerRepairShop.Web) in 36.2588ms
+2023-01-03 12:13:00.978 +01:00 [INF] Executed endpoint 'BdR.ComputerRepairShop.Web.Controllers.ProjectController.Index (BdR.ComputerRepairShop.Web)'
+2023-01-03 12:13:00.980 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:57678/Project/1 - - - 200 - text/html;+charset=utf-8 46.5780ms
+2023-01-03 12:13:00.988 +01:00 [INF] Request starting HTTP/1.1 GET http://localhost:57678/BdR.ComputerRepairShop.Web.styles.css?v=n4VQ-qHJiKTFAdGQS79qHVt2lg1Js3qM6PZrKNYLWO0 - -
+2023-01-03 12:13:00.988 +01:00 [INF] Request starting HTTP/1.1 GET http://localhost:57678/_framework/aspnetcore-browser-refresh.js - -
+2023-01-03 12:13:00.988 +01:00 [INF] Request starting HTTP/1.1 GET http://localhost:57678/_vs/browserLink - -
+2023-01-03 12:13:00.989 +01:00 [INF] The file /BdR.ComputerRepairShop.Web.styles.css was not modified
+2023-01-03 12:13:00.991 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:57678/_framework/aspnetcore-browser-refresh.js - - - 200 12022 application/javascript;+charset=utf-8 1.6461ms
+2023-01-03 12:13:00.991 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:57678/BdR.ComputerRepairShop.Web.styles.css?v=n4VQ-qHJiKTFAdGQS79qHVt2lg1Js3qM6PZrKNYLWO0 - - - 304 - text/css 2.2242ms
+2023-01-03 12:13:01.010 +01:00 [INF] Request starting HTTP/1.1 GET http://localhost:57678/lib/bootstrap/dist/js/bootstrap.bundle.min.js.map - -
+2023-01-03 12:13:01.026 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:57678/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 35.9751ms
+2023-01-03 12:13:01.029 +01:00 [INF] Sending file. Request path: '/lib/bootstrap/dist/js/bootstrap.bundle.min.js.map'. Physical path: 'C:\code\benderidder-github\BdR.ComputerRepairShop\src\BdR.ComputerRepairShop.Web\wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.min.js.map'
+2023-01-03 12:13:01.042 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:57678/lib/bootstrap/dist/js/bootstrap.bundle.min.js.map - - - 200 327261 text/plain 31.8791ms
+2023-01-03 12:13:05.422 +01:00 [INF] Request starting HTTP/1.1 GET http://localhost:57678/_framework/aspnetcore-browser-refresh.js - -
+2023-01-03 12:13:05.424 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:57678/_framework/aspnetcore-browser-refresh.js - - - 200 12022 application/javascript;+charset=utf-8 1.2344ms
+2023-01-03 12:13:05.444 +01:00 [INF] Request starting HTTP/1.1 GET http://localhost:57678/lib/bootstrap/dist/js/bootstrap.bundle.min.js.map - -
+2023-01-03 12:13:05.448 +01:00 [INF] Sending file. Request path: '/lib/bootstrap/dist/js/bootstrap.bundle.min.js.map'. Physical path: 'C:\code\benderidder-github\BdR.ComputerRepairShop\src\BdR.ComputerRepairShop.Web\wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.min.js.map'
+2023-01-03 12:13:05.459 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:57678/lib/bootstrap/dist/js/bootstrap.bundle.min.js.map - - - 200 327261 text/plain 15.2825ms
+2023-01-03 12:13:10.107 +01:00 [INF] Request starting HTTP/1.1 GET http://localhost:57678/swagger - -
+2023-01-03 12:13:10.109 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:57678/swagger - - - 301 - - 2.5180ms
+2023-01-03 12:13:10.111 +01:00 [INF] Request starting HTTP/1.1 GET http://localhost:57678/swagger/index.html - -
+2023-01-03 12:13:10.178 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:57678/swagger/index.html - - - 200 - text/html;charset=utf-8 66.3681ms
+2023-01-03 12:13:10.188 +01:00 [INF] Request starting HTTP/1.1 GET http://localhost:57678/swagger/swagger-ui-bundle.js - -
+2023-01-03 12:13:10.188 +01:00 [INF] Request starting HTTP/1.1 GET http://localhost:57678/swagger/swagger-ui.css - -
+2023-01-03 12:13:10.188 +01:00 [INF] Request starting HTTP/1.1 GET http://localhost:57678/swagger/swagger-ui-standalone-preset.js - -
+2023-01-03 12:13:10.189 +01:00 [INF] Request starting HTTP/1.1 GET http://localhost:57678/_framework/aspnetcore-browser-refresh.js - -
+2023-01-03 12:13:10.190 +01:00 [INF] Request starting HTTP/1.1 GET http://localhost:57678/_vs/browserLink - -
+2023-01-03 12:13:10.190 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:57678/_framework/aspnetcore-browser-refresh.js - - - 200 12022 application/javascript;+charset=utf-8 1.2771ms
+2023-01-03 12:13:10.201 +01:00 [INF] Sending file. Request path: '/swagger-ui.css'. Physical path: 'N/A'
+2023-01-03 12:13:10.205 +01:00 [INF] Sending file. Request path: '/swagger-ui-bundle.js'. Physical path: 'N/A'
+2023-01-03 12:13:10.205 +01:00 [INF] Sending file. Request path: '/swagger-ui-standalone-preset.js'. Physical path: 'N/A'
+2023-01-03 12:13:10.212 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:57678/swagger/swagger-ui.css - - - 200 143943 text/css 23.7967ms
+2023-01-03 12:13:10.222 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:57678/swagger/swagger-ui-standalone-preset.js - - - 200 339486 text/javascript 33.3369ms
+2023-01-03 12:13:10.236 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:57678/_vs/browserLink - - - 200 - text/javascript;+charset=UTF-8 45.9583ms
+2023-01-03 12:13:10.250 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:57678/swagger/swagger-ui-bundle.js - - - 200 1096145 text/javascript 61.8982ms
+2023-01-03 12:13:10.430 +01:00 [INF] Request starting HTTP/1.1 GET http://localhost:57678/swagger/v1/swagger.json - -
+2023-01-03 12:13:10.453 +01:00 [INF] Request starting HTTP/1.1 GET http://localhost:57678/swagger/favicon-32x32.png - -
+2023-01-03 12:13:10.458 +01:00 [INF] Sending file. Request path: '/favicon-32x32.png'. Physical path: 'N/A'
+2023-01-03 12:13:10.458 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:57678/swagger/favicon-32x32.png - - - 200 628 image/png 4.5846ms
+2023-01-03 12:13:10.584 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:57678/swagger/v1/swagger.json - - - 200 - application/json;charset=utf-8 154.4633ms
+2023-01-03 12:13:20.521 +01:00 [INF] Request starting HTTP/1.1 GET http://localhost:57678/Contributors - -
+2023-01-03 12:13:20.564 +01:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "c"."Id", "c"."Name"
+FROM "Contributors" AS "c"
+2023-01-03 12:13:20.571 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:57678/Contributors - - - 200 - application/json;+charset=utf-8 50.1276ms
+2023-01-03 12:13:53.646 +01:00 [INF] Request starting HTTP/1.1 GET http://localhost:57678/info - -
+2023-01-03 12:13:53.653 +01:00 [INF] Executing endpoint 'BdR.ComputerRepairShop.Web.Api.MetaController.Info (BdR.ComputerRepairShop.Web)'
+2023-01-03 12:13:53.660 +01:00 [INF] Route matched with {action = "Info", controller = "Meta", page = ""}. Executing controller action with signature Microsoft.AspNetCore.Mvc.ActionResult`1[System.String] Info() on controller BdR.ComputerRepairShop.Web.Api.MetaController (BdR.ComputerRepairShop.Web).
+2023-01-03 12:13:53.679 +01:00 [INF] Executing action method BdR.ComputerRepairShop.Web.Api.MetaController.Info (BdR.ComputerRepairShop.Web) - Validation state: "Valid"
+2023-01-03 12:13:53.711 +01:00 [INF] Executed action method BdR.ComputerRepairShop.Web.Api.MetaController.Info (BdR.ComputerRepairShop.Web), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 32.3494ms.
+2023-01-03 12:13:53.715 +01:00 [INF] Executing OkObjectResult, writing value of type 'System.String'.
+2023-01-03 12:13:53.716 +01:00 [INF] Executed action BdR.ComputerRepairShop.Web.Api.MetaController.Info (BdR.ComputerRepairShop.Web) in 56.0475ms
+2023-01-03 12:13:53.716 +01:00 [INF] Executed endpoint 'BdR.ComputerRepairShop.Web.Api.MetaController.Info (BdR.ComputerRepairShop.Web)'
+2023-01-03 12:13:53.717 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:57678/info - - - 200 - text/plain;+charset=utf-8 71.0775ms
+2023-01-03 12:14:22.153 +01:00 [INF] Request starting HTTP/1.1 GET http://localhost:57678/api/Projects - -
+2023-01-03 12:14:22.162 +01:00 [INF] Executing endpoint 'BdR.ComputerRepairShop.Web.Api.ProjectsController.List (BdR.ComputerRepairShop.Web)'
+2023-01-03 12:14:22.166 +01:00 [INF] Route matched with {action = "List", controller = "Projects", page = ""}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] List() on controller BdR.ComputerRepairShop.Web.Api.ProjectsController (BdR.ComputerRepairShop.Web).
+2023-01-03 12:14:22.182 +01:00 [INF] Executing action method BdR.ComputerRepairShop.Web.Api.ProjectsController.List (BdR.ComputerRepairShop.Web) - Validation state: "Valid"
+2023-01-03 12:14:22.197 +01:00 [INF] Executed DbCommand (0ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "p"."Id", "p"."Name", "p"."Priority"
+FROM "Projects" AS "p"
+2023-01-03 12:14:22.198 +01:00 [INF] Executed action method BdR.ComputerRepairShop.Web.Api.ProjectsController.List (BdR.ComputerRepairShop.Web), returned result Microsoft.AspNetCore.Mvc.OkObjectResult in 15.7522ms.
+2023-01-03 12:14:22.199 +01:00 [INF] Executing OkObjectResult, writing value of type 'System.Collections.Generic.List`1[[BdR.ComputerRepairShop.Web.ApiModels.ProjectDTO, BdR.ComputerRepairShop.Web, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2023-01-03 12:14:22.283 +01:00 [INF] Executed action BdR.ComputerRepairShop.Web.Api.ProjectsController.List (BdR.ComputerRepairShop.Web) in 117.4299ms
+2023-01-03 12:14:22.283 +01:00 [INF] Executed endpoint 'BdR.ComputerRepairShop.Web.Api.ProjectsController.List (BdR.ComputerRepairShop.Web)'
+2023-01-03 12:14:22.284 +01:00 [INF] Request finished HTTP/1.1 GET http://localhost:57678/api/Projects - - - 200 43 application/json;+charset=utf-8 130.8079ms
